@@ -1,0 +1,34 @@
+doctype html 
+html 
+  head 
+   block head
+      meta(charset='UTF-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      link(rel='stylesheet', href='/css/style.css')
+      link(rel="shortcut icon", type='image/png', href="/image/favicon.png")
+      link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
+      //- Leaflet CSS from CDN
+      link(rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' integrity='sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=' crossorigin='')
+      title Natours | #{title}
+
+  body
+   //header
+   include _header  
+
+   //Content
+   block content 
+    h1 This is Placeholder
+
+   //Footer
+   include _footer
+
+   //- Leaflet JS from CDN
+   script(src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js' integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' crossorigin='')
+   
+   //- by using parcel
+   script(src='/js/bundle.js')
+   //- without using parcel
+  //-  script(src='https://unpkg.com/axios/dist/axios.min.js')
+  //-  script(src='/js/leafletMap.js')
+  //-  script(src='/js/login.js')
+   
