@@ -2,6 +2,8 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const Tour = require('./../models/tourModel');
 const Razorpay = require('razorpay');
+const factory = require('./handlerFactory');
+
 
 const razorpay = new Razorpay({
    key_id: process.env.RAZORPAY_KEY_ID,
@@ -30,3 +32,10 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
       order
    });
 });
+
+
+exports.createBooking = factory.createOne(Booking);
+exports.getBooking = factory.getOne(Booking);
+exports.getAllBookings = factory.getAll(Booking);
+exports.updateBooking = factory.updateOne(Booking);
+exports.deleteBooking = factory.deleteOne(Booking);
