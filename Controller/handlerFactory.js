@@ -57,7 +57,7 @@ exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
 })
 
 exports.getAll = Model => catchAsync(async (req, res, next) => {
-    console.log("hii i am form getAll");
+    // console.log("hii i am form getAll");
     let filter = {};
     if (req.params.tourId) filter = { tour: req.params.tourId };
 
@@ -69,7 +69,7 @@ exports.getAll = Model => catchAsync(async (req, res, next) => {
         .pagination();
     // const doc = await features.query.explain();
     const doc = await features.query;
-    console.log(doc);
+    // console.log(doc);
     res.status(200).json({
         status: "success",
         requestAt: req.reqTime,

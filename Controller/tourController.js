@@ -31,7 +31,7 @@ exports.uploadTourPhoto = upload.fields([
 ]);
 
 exports.resizeTourPhoto = catchAsync(async (req, res, next) => {
-    console.log(req.files);
+    // console.log(req.files);
     if (!req.files.imageCover || !req.files.images) return next();
 
     //imageCover
@@ -66,10 +66,10 @@ exports.resizeTourPhoto = catchAsync(async (req, res, next) => {
 
 
 exports.aliasTopTours = (req, res, next) => {
-    console.log("BEFORE:", JSON.parse(JSON.stringify(req.query)));
+    // console.log("BEFORE:", JSON.parse(JSON.stringify(req.query)));
     req.query.limit = "5";
     req.query.fields = "name,price";
-    console.log("AFTER:", JSON.parse(JSON.stringify(req.query)));
+    // console.log("AFTER:", JSON.parse(JSON.stringify(req.query)));
     next();
 }
 

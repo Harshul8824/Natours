@@ -15,6 +15,7 @@ const path = require('path');
 const viewRouter = require('./Routes/viewRoutes');
 const bookingRouter = require('./Routes/bookingRoutes');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const app = express();
 
@@ -97,6 +98,8 @@ app.use(
 
 //SERVING STATIC FILES
 app.use(express.static(path.join(__dirname, 'public')));  // It tells Express: “Serve everything inside the public folder directly to the browser.”
+
+app.use(compression());
 
 // TEST MIDDLEWARES
 // app.use((req,res,next)=>{

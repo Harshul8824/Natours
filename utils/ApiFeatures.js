@@ -6,7 +6,7 @@ class ApiFeatures {
 
    filter() {
       //1A. FILTERING
-      console.log("hii from the filter");
+      // console.log("hii from the filter");
       const queryObj = JSON.parse(JSON.stringify(this.queryString));
       const excludeFields = ['page', 'limit', 'fields', 'sort'];
       excludeFields.forEach(el => delete queryObj[el]);
@@ -34,7 +34,7 @@ class ApiFeatures {
       //3 FIELDS LIMITINGS
       if (this.queryString.fields) {
          this.query = this.query.select(this.queryString.fields.split(',').join(' '));
-         console.log("hii i am from the filed");
+         // console.log("hii i am from the filed");
       }
       else {
          this.query = this.query.select('-__v');
@@ -47,7 +47,7 @@ class ApiFeatures {
       const page = this.queryString.page * 1 || 1;
       const limit = this.queryString.limit * 1 || 100;
       const skip = (page - 1) * limit;
-      console.log("hii i am from the pagination");
+      // console.log("hii i am from the pagination");
       this.query = this.query.skip(skip).limit(limit);
 
       return this;

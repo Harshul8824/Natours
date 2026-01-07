@@ -124,11 +124,11 @@ tourSchema.pre('save', function (next) {   //called pre save hooks or pre save m
   next();
 })
 
-tourSchema.pre('save', function (next) {  //this point to the document body
-  console.log("will save documents.....");
+// tourSchema.pre('save', function (next) {  //this point to the document body
+//   console.log("will save documents.....");
 
-  next();
-})
+//   next();
+// })
 
 //for modelling tour guide : embedding (not good practice instead we use : child referencing)
 // tourSchema.pre('save', async function(next){
@@ -137,11 +137,11 @@ tourSchema.pre('save', function (next) {  //this point to the document body
 //   next();
 // })
 
-tourSchema.post('save', function (doc, next) {  //called post save hooks or post save middleware
-  console.log(doc);
+// tourSchema.post('save', function (doc, next) {  //called post save hooks or post save middleware
+//   console.log(doc);
 
-  next();
-})
+//   next();
+// })
 
 //TO POPULATE THE OBJECTID
 tourSchema.pre(/^find/, function (next) {
@@ -161,12 +161,12 @@ tourSchema.pre(/^find/, function (next) { //  /^find/ take all function start wi
   next();
 })
 
-tourSchema.post('find', function (doc, next) {
-  console.log(`Query took ${Date.now() - this.start} milliseconds`);
-  // console.log(doc);
+// tourSchema.post('find', function (doc, next) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds`);
+//   // console.log(doc);
 
-  next();
-})
+//   next();
+// })
 
 //AGGREGATE MIDDLEWARE  //this point to the aggregate validators body
 // tourSchema.pre('aggregate', function (next) {  //using this we add one more aggregate operater add so that we remove the secret key documnent

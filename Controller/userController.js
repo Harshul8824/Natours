@@ -71,8 +71,8 @@ exports.deleteUser = factory.deleteOne(User);
 
 exports.updateMe = catchAsync(async (req, res, next) => {
 
-    console.log(req.file);
-    console.log(req.body);
+    // console.log(req.file);
+    // console.log(req.body);
 
     //1. ensure that password field is not present in this
     if (req.body.password || req.body.passwordConfirm) {
@@ -81,7 +81,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
     //2. filter out unwanted fields name which is not allowed to be updated
     const filteredBody = filterObj(req.body, 'name', 'email');
-    console.log(req.file);
+    // console.log(req.file);
     if (req.file) filteredBody.photo = req.file.filename;
     // console.log(filteredBody);
 

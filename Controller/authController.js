@@ -5,9 +5,7 @@ const User = require('./../models/userModel');
 const AppError = require('./../utils/AppError');
 const bcrypt = require('bcryptjs');
 const Email = require('./../utils/email');
-const { error } = require('console');
 const crypto = require('crypto');
-const { findOne } = require('../models/tourModel');
 
 
 const createSendToken = (user, statusCode, res) => {
@@ -47,7 +45,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     });
     
     const url = `${req.protocol}://${req.get('host')}/me`;
-    console.log(url);
+    // console.log(url);
     await new Email(newUser, url).sendWelcome();
 
     createSendToken(newUser, 201, res);
@@ -174,7 +172,7 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
         })
     }
     catch (err) {
-        console.log("email err", err);
+        // console.log("email err", err);
         user.passwordResetToken = undefined;
         user.passwordResetExpires = undefined;
         await user.save({ validateBeforeSave: false });
@@ -208,7 +206,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
     //1. Get User from collection
-    console.log("hii");
+    // console.log("hii");
     const user = await User.findById(req.user.id).select('+password');
 
     //2. check if posted current password is correct
