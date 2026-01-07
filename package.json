@@ -1,9 +1,13 @@
 {
   "name": "natours",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
     "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
