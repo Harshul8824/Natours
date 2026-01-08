@@ -2,7 +2,17 @@
 
 Natours is a full-stack MERN (MongoDB, Express, React, Node.js) tour booking platform that allows users to explore, book, and review nature tours.
 
-This project demonstrates real-world backend and frontend engineering patterns used in production systems, including secure authentication, online payments, scalable architecture, and a modern React user interface.
+This project demonstrates real-world backend and frontend engineering practices used in production systems, including:
+
+Secure authentication & authorization
+
+Online payments with Stripe
+
+Scalable REST API architecture
+
+Modern React UI patterns
+
+Production-ready security practices
 
 🚀 Features
 🧭 Tours
@@ -18,7 +28,7 @@ Search tours by price, duration, and difficulty
 
 👤 Authentication & Security
 
-JWT-based authentication (access & refresh tokens)
+JWT authentication (access & refresh tokens)
 
 Secure password hashing with bcrypt
 
@@ -32,13 +42,13 @@ Security Best Practices
 
 Rate limiting
 
-Data sanitization
+Data sanitization (NoSQL & XSS protection)
 
 Helmet & CORS configuration
 
 🛒 Bookings & Payments
 
-Tour booking with Stripe Checkout
+Stripe Checkout integration
 
 Secure online payments
 
@@ -81,7 +91,7 @@ Context API / Redux (optional)
 
 Axios
 
-Modern UI with reusable components
+Reusable component-based UI
 
 Backend
 
@@ -181,6 +191,9 @@ EMAIL_PORT=2525
 STRIPE_SECRET_KEY=your_stripe_secret_key
 STRIPE_WEBHOOK_SECRET=your_webhook_secret
 
+
+⚠️ Never commit your .env file to version control.
+
 4️⃣ Run the Application
 Backend
 npm run dev
@@ -188,6 +201,11 @@ npm run dev
 Frontend
 cd client
 npm start
+
+
+Open your browser at:
+
+http://localhost:3000
 
 📦 API Endpoints (Summary)
 Tours
@@ -235,5 +253,6 @@ Docker
 
 Heroku (legacy)
 
+Build for Production
 npm run build
 npm start
