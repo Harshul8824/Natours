@@ -3,6 +3,7 @@ const AppError = require('../utils/AppError');
 const Tour = require('./../models/tourModel');
 const Razorpay = require('razorpay');
 const factory = require('./handlerFactory');
+const Booking = require('./../models/bookingModel');
 
 
 const razorpay = new Razorpay({

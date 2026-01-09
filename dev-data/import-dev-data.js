@@ -5,6 +5,9 @@ const Tour = require('./../models/tourModel');
 const Review = require('./../models/reviewModel');
 const User = require('./../models/userModel');
 
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config({ path: './config.env' });
+// }
 dotenv.config({ path: './config.env' });
 
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bookingSchema = mongoose.bookingSchema({
+const bookingSchema = mongoose.Schema({
     tour : {
       type : mongoose.Schema.ObjectId,
       ref : 'Tour',
@@ -33,6 +33,6 @@ bookingSchema.pre(/^find/, function(next){
     next();
 });
 
-const Bookings = mongoose.model('Bookings', bookingSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = Bookings;
+module.exports = Booking;
