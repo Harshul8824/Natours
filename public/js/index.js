@@ -2,7 +2,7 @@ import { login, logout } from './login';
 import '@babel/polyfill';
 import { dispplayMap } from './leafletMap';
 import { updateSttings } from './updateSettings';
-import { bookTour } from './razorpay'
+// import { bookTour } from './razorpay'
 
 //LOGIN
 const loginForm = document.querySelector('.form--login');
@@ -67,6 +67,6 @@ if(bookBtn){
     bookBtn.addEventListener('click', e => {
         e.target.textContent = 'Processing....'
         const { tourId } = e.target.dataset;
-        bookTour(tourId);
+        // bookTour(tourId);
     })
 }
