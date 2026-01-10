@@ -2,12 +2,14 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-// process.on('uncaughtException', err => {  //it catch error like console.log(x);
-//     console.log('uncaught exception ! 💥 shutting down');
-//     console.log(err);
-//     console.log(err.name, err.path);
-//     process.exit(1);
-// })
+if(process.env.NODE_ENV === 'development'){
+process.on('uncaughtException', err => {  //it catch error like console.log(x);
+    console.log('uncaught exception ! 💥 shutting down');
+    console.log(err);
+    console.log(err.name, err.path);
+    process.exit(1);
+});
+}
 
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -16,7 +18,7 @@ const mongoose = require('mongoose');
 dotenv.config({ path: './config.env' });
 
 const app = require('./app');
-
+    
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASSWORD); //connest atlas db
 // const DB = process.env.DATABASE_LOCAL; //connest to local db
 
