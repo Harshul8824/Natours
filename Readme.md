@@ -4,15 +4,15 @@ Natours is a full-stack MERN (MongoDB, Express, React, Node.js) tour booking pla
 
 This project demonstrates real-world backend and frontend engineering practices used in production systems, including:
 
-Secure authentication & authorization
+✅ Secure authentication & authorization
 
-Online payments with Stripe
+💳 Online payments with Stripe
 
-Scalable REST API architecture
+🚀 Scalable REST API architecture
 
-Modern React UI patterns
+🎨 Modern React UI patterns
 
-Production-ready security practices
+🔒 Production-ready security practices
 
 🚀 Features
 🧭 Tours
@@ -132,26 +132,9 @@ Natours/
 │
 ├── server/                  # Backend (Node + Express)
 │   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── bookingController.js
-│   │   ├── tourController.js
-│   │   └── userController.js
-│   │
 │   ├── models/
-│   │   ├── userModel.js
-│   │   ├── tourModel.js
-│   │   └── bookingModel.js
-│   │
 │   ├── routes/
-│   │   ├── tourRoutes.js
-│   │   ├── userRoutes.js
-│   │   └── bookingRoutes.js
-│   │
 │   ├── utils/
-│   │   ├── apiFeatures.js
-│   │   ├── catchAsync.js
-│   │   └── appError.js
-│   │
 │   ├── app.js
 │   └── server.js
 │
@@ -195,15 +178,19 @@ STRIPE_WEBHOOK_SECRET=your_webhook_secret
 ⚠️ Never commit your .env file to version control.
 
 4️⃣ Run the Application
+
 Backend
+
 npm run dev
 
+
 Frontend
+
 cd client
 npm start
 
 
-Open your browser at:
+Open in browser:
 
 http://localhost:3000
 
@@ -253,6 +240,149 @@ Docker
 
 Heroku (legacy)
 
-Build for Production
+🌐 Render Deployment Guide (Backend)
+
+This section explains how to deploy the Node + Express API to Render.
+
+✅ Prerequisites
+
+A Render account: https://render.com
+
+MongoDB Atlas database
+
+Stripe account
+
+GitHub repository connected to Render
+
+🧱 Step 1 – Prepare the Project
+1. Ensure production scripts exist
+
+In your root package.json:
+
+"scripts": {
+  "start": "node server/server.js",
+  "dev": "nodemon server/server.js"
+}
+
+
+Render uses the start script in production.
+
+2. Enable dynamic port usage
+
+In server.js:
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+
+Render automatically injects a PORT.
+
+☁️ Step 2 – Create a Web Service on Render
+
+Go to Render Dashboard
+
+Click New → Web Service
+
+Connect your GitHub repository
+
+Select the repository and branch
+
+⚙️ Step 3 – Configure Build Settings
+
+Fill in the following:
+
+Setting	Value
+Environment	Node
+Build Command	npm install
+Start Command	npm start
+Root Directory	(leave blank if backend is in root)
+
+If your backend lives inside /server, set:
+
+Root Directory: server
+
+🔐 Step 4 – Add Environment Variables
+
+In Render → Environment → Environment Variables, add all variables from your .env file:
+
+DATABASE
+JWT_SECRET
+JWT_EXPIRES_IN
+JWT_COOKIE_EXPIRES_IN
+EMAIL_USERNAME
+EMAIL_PASSWORD
+EMAIL_HOST
+EMAIL_PORT
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
+NODE_ENV=production
+
+
+❗ Never store secrets directly in GitHub.
+
+🚀 Step 5 – Deploy
+
+Click Create Web Service.
+Render will:
+
+Install dependencies
+
+Build the project
+
+Start the server
+
+Provide a live URL
+
+Example:
+
+https://natours-api.onrender.com
+
+🔁 Step 6 – Update Frontend API URL
+
+In your React app (Axios or fetch base URL), update the API base URL:
+
+const API_BASE_URL = "https://natours-api.onrender.com/api/v1";
+
+
+Redeploy your frontend (Vercel / Netlify).
+
+💳 Step 7 – Stripe Webhook Configuration
+
+In Stripe Dashboard:
+
+Go to Developers → Webhooks
+
+Add endpoint:
+
+https://natours-api.onrender.com/api/v1/bookings/webhook-checkout
+
+
+Copy the webhook secret and update it in Render environment variables.
+
+🐞 Common Render Issues
+
+❌ App crashes on deploy
+
+Check logs in Render dashboard
+
+Ensure start script exists
+
+Verify Node version compatibility
+
+❌ MongoDB connection fails
+
+Whitelist Render IP in MongoDB Atlas (or allow all IPs: 0.0.0.0/0)
+
+Verify connection string
+
+❌ Stripe webhook not firing
+
+Confirm webhook URL is public
+
+Make sure webhook secret matches
+
+📦 Production Build (Optional)
 npm run build
 npm start
