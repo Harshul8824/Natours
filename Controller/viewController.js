@@ -30,6 +30,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
   //2) build template
   //3) render template using data from 1
 
+  // console.log(tour.images);
 
   res.status(200).render('tour', {
     title: `${tour.name} tour`,
@@ -69,14 +70,14 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
 
 exports.getMyTours = catchAsync(async (req, res, next) => {
   //1) find all bookings
-     const bookings = await Booking.find({ user : req.user.id});
+  const bookings = await Booking.find({ user: req.user.id });
 
   //2) find tours with the returned IDs
   const tourId = bookings.map(el => el.tour);
-  const tours = await Tour.find({_id : {$in : tourIDs}});
+  const tours = await Tour.find({ _id: { $in: tourIDs } });
 
   res.status(200).render('overview', {
-    title : 'My Tours',
+    title: 'My Tours',
     tours
   })
 })

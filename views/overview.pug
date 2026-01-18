@@ -8,7 +8,7 @@ block content
         .card__header
             .card__picture
                 .card__picture-overlay &nbsp;
-                img.card__picture-img(src=`/img/tours/${tour.imageCover}`, alt=`${tour.name}`)
+                img.card__picture-img(src=`/img/tours/${tour.imageCover}` alt=`${tour.name}` onerror="this.onerror=null;this.src='/img/users/default.jpg';")
             h3.heading-tertirary
                 span= tour.name 
 
@@ -38,7 +38,7 @@ block content
               | 
               span.card__footer-text per person
             p.card__ratings
-              span.card__footer-value= tour.ratingsAverage
+              span.card__footer-value= tour.ratingsAverage.toFixed(2)
               | 
               span.card__footer-text= `rating (${tour.ratingsQuantity})` 
             a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details

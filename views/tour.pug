@@ -63,7 +63,7 @@ block content
   section.section-pictures
     each imag, i in tour.images
       .picture-box
-        img.picture-box__img(src=`/img/tours/${imag}`, alt= `${tour.name} tour ${i + 1}`, class= `picture-box__img--${i + 1}`)
+        img.picture-box__img(src= `/img/tours/${imag}`, alt= `${tour.name} tour ${i + 1}`, class= `picture-box__img--${i + 1}`)
 
   //- map
   section.section-map
