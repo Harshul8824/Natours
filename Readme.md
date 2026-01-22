@@ -5,13 +5,9 @@ Natours is a full-stack MERN (MongoDB, Express, React, Node.js) tour booking pla
 This project demonstrates real-world backend and frontend engineering practices used in production systems, including:
 
 ✅ Secure authentication & authorization
-
 💳 Online payments with Stripe
-
 🚀 Scalable REST API architecture
-
 🎨 Modern React UI patterns
-
 🔒 Production-ready security practices
 
 🚀 Features
@@ -38,7 +34,7 @@ Protected API routes
 
 Forgot & reset password flow via email
 
-Security Best Practices
+🔐 Security Best Practices
 
 Rate limiting
 
@@ -178,14 +174,10 @@ STRIPE_WEBHOOK_SECRET=your_webhook_secret
 ⚠️ Never commit your .env file to version control.
 
 4️⃣ Run the Application
-
 Backend
-
 npm run dev
 
-
 Frontend
-
 cd client
 npm start
 
@@ -241,12 +233,9 @@ Docker
 Heroku (legacy)
 
 🌐 Render Deployment Guide (Backend)
-
-This section explains how to deploy the Node + Express API to Render.
-
 ✅ Prerequisites
 
-A Render account: https://render.com
+Render account
 
 MongoDB Atlas database
 
@@ -255,7 +244,7 @@ Stripe account
 GitHub repository connected to Render
 
 🧱 Step 1 – Prepare the Project
-1. Ensure production scripts exist
+Ensure production scripts exist
 
 In your root package.json:
 
@@ -264,10 +253,7 @@ In your root package.json:
   "dev": "nodemon server/server.js"
 }
 
-
-Render uses the start script in production.
-
-2. Enable dynamic port usage
+Enable dynamic port usage
 
 In server.js:
 
@@ -287,25 +273,17 @@ Click New → Web Service
 
 Connect your GitHub repository
 
-Select the repository and branch
+Select repository and branch
 
 ⚙️ Step 3 – Configure Build Settings
-
-Fill in the following:
-
 Setting	Value
 Environment	Node
 Build Command	npm install
 Start Command	npm start
-Root Directory	(leave blank if backend is in root)
-
-If your backend lives inside /server, set:
-
-Root Directory: server
-
+Root Directory	Leave blank (or set to server if backend is inside /server)
 🔐 Step 4 – Add Environment Variables
 
-In Render → Environment → Environment Variables, add all variables from your .env file:
+Add all .env variables inside Render dashboard:
 
 DATABASE
 JWT_SECRET
@@ -324,7 +302,6 @@ NODE_ENV=production
 
 🚀 Step 5 – Deploy
 
-Click Create Web Service.
 Render will:
 
 Install dependencies
@@ -341,28 +318,25 @@ https://natours-api.onrender.com
 
 🔁 Step 6 – Update Frontend API URL
 
-In your React app (Axios or fetch base URL), update the API base URL:
+Update Axios base URL:
 
 const API_BASE_URL = "https://natours-api.onrender.com/api/v1";
 
 
-Redeploy your frontend (Vercel / Netlify).
+Redeploy frontend.
 
 💳 Step 7 – Stripe Webhook Configuration
 
-In Stripe Dashboard:
-
-Go to Developers → Webhooks
+Stripe Dashboard → Developers → Webhooks
 
 Add endpoint:
 
 https://natours-api.onrender.com/api/v1/bookings/webhook-checkout
 
 
-Copy the webhook secret and update it in Render environment variables.
+Copy webhook secret and update it in Render environment variables.
 
 🐞 Common Render Issues
-
 ❌ App crashes on deploy
 
 Check logs in Render dashboard
@@ -373,7 +347,7 @@ Verify Node version compatibility
 
 ❌ MongoDB connection fails
 
-Whitelist Render IP in MongoDB Atlas (or allow all IPs: 0.0.0.0/0)
+Whitelist Render IP in MongoDB Atlas (0.0.0.0/0)
 
 Verify connection string
 
@@ -381,7 +355,7 @@ Verify connection string
 
 Confirm webhook URL is public
 
-Make sure webhook secret matches
+Ensure webhook secret matches
 
 📦 Production Build (Optional)
 npm run build

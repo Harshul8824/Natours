@@ -16,11 +16,17 @@ const viewRouter = require('./Routes/viewRoutes');
 const bookingRouter = require('./Routes/bookingRoutes');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors')
 
 const app = express();
 
 app.set('view engine', 'pug');   //using this we can render .pug file using res.render()
 app.set('views', path.join(__dirname, 'views'));  //set the directory where your views file lives
+
+app.use(cors({
+  origin : 'http://localhost:5173',
+  credentials : true
+}));
 
 // // Find your CSP middleware and update it
 app.use(
