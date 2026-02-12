@@ -11,7 +11,7 @@ function App() {
         setTours(data.data.data);         // ✅ set state
       })
       .catch(err => console.error(err));
-  }, []);
+  }, []); 
 
   console.log(tours);
 
