@@ -16,6 +16,7 @@ const viewRouter = require('./Routes/viewRoutes');
 const bookingRouter = require('./Routes/bookingRoutes');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const app = express();
 
@@ -61,6 +62,10 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 //BODY PARSER, READING DATA FROM BODY INTO REQ.BODY
+
+// allow all origins (dev only)
+app.use(cors());
+
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 app.use(cookieParser());
