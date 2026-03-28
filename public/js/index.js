@@ -1,4 +1,4 @@
-import { login, logout } from './login';
+import { login, logout, signup } from './login';
 import '@babel/polyfill';
 import { dispplayMap } from './leafletMap';
 import { updateSttings } from './updateSettings';
@@ -6,6 +6,7 @@ import { updateSttings } from './updateSettings';
 
 //LOGIN
 const loginForm = document.querySelector('.form--login');
+const signupForm = document.querySelector('.form--signup');
 const logoutBtn = document.querySelector('.nav__el--logout')
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
@@ -28,6 +29,18 @@ if (loginForm) {
         // console.log(email, password);
 
         login(email, password);
+    })
+}
+
+if (signupForm) {
+    signupForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordConfirm').value;
+
+        signup(name, email, password, passwordConfirm);
     })
 }
 
