@@ -5,7 +5,7 @@ export default function Home() {
   const [tours, setTours] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/tours")
+    fetch("/api/v1/tours")
       .then(res => res.json())
       .then(data => {
         setTours(data.data.doc);
