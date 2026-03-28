@@ -52,7 +52,7 @@ export default function Header({ user, onLogout }) {
                             Log in
                         </Link>
 
-                        <Link className="nav__el nav__el--cta" to="#">
+                        <Link className="nav__el nav__el--cta" to="/signup">
                             Sign up
                         </Link>
                     </>
