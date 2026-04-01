@@ -5,12 +5,16 @@ const Razorpay = require('razorpay');
 const factory = require('./handlerFactory');
 const Booking = require('./../models/bookingModel');
 
-const razorpay = new Razorpay({
-   key_id: process.env.RAZORPAY_KEY_ID,
-   key_secret: process.env.RAZORPAY_KEY_SECRET
-});
-
 exports.getCheckOutSession = catchAsync(async (req, res, next) => {
+   if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      return next(new AppError('Payment keys are not configured on the server environment!', 500));
+   }
+
+   const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET
+   });
+
    //1) GET THE CURRENTLY BOOKED TOUR
    const tour = await Tour.findById(req.params.tourID);
    if (!tour) return next(new AppError('Tour not found!', 404));
