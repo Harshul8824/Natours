@@ -1,40 +1,44 @@
-// const crypto = require('crypto');
-// const Booking = require('../models/bookingModel');
-// const Tour = require('../models/tourModel');
+const crypto = require('crypto');
+const Booking = require('../models/bookingModel');
+const Tour = require('../models/tourModel');
 
-// exports.razorpayWebhook = (req, res) => {
-//   const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+exports.razorpayWebhook = async (req, res) => {
+  try {
+    const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    const signature = req.headers['x-razorpay-signature'];
+    const expectedSignature = crypto
+      .createHmac('sha256', secret)
+      .update(JSON.stringify(req.body))
+      .digest('hex');
 
-//   const signature = req.headers['x-razorpay-signature'];
+    // 1) Verify webhook
+    // Note: If you receive signature verification errors in production, Razorpay docs
+    // define verify validation via crypto crypto.timingSafeEqual or similar string matches
+    if (signature !== expectedSignature) {
+      return res.status(400).send('Invalid signature');
+    }
 
-//   const expectedSignature = crypto
-//     .createHmac('sha256', secret)
-//     .update(JSON.stringify(req.body))
-//     .digest('hex');
+    // 2) Read event
+    const event = req.body.event;
 
-//   // 1) Verify webhook
-//   if (signature !== expectedSignature) {
-//     return res.status(400).send('Invalid signature');
-//   }
+    // ✅ THIS IS WHERE YOUR CODE GOES
+    if (event === 'payment.captured' || event === 'order.paid') {
+      const payment = req.body.payload.payment.entity;
 
-//   // 2) Read event
-//   const event = req.body.event;
+      const tourId = payment.notes.tourId;
+      const userId = payment.notes.userId;
+      const price = payment.amount / 100;
 
-//   // ✅ THIS IS WHERE YOUR CODE GOES
-//   if (event === 'payment.captured') {
-//     const payment = req.body.payload.payment.entity;
+      // 3) Create booking
+      await Booking.create({
+        tour: tourId,
+        user: userId,
+        price
+      });
+    }
 
-//     const tourId = payment.notes.tourId;
-//     const userId = payment.notes.userId;
-//     const price = payment.amount / 100;
-
-//     // 3) Create booking
-//     Booking.create({
-//       tour: tourId,
-//       user: userId,
-//       price
-//     });
-//   }
-
-//   res.status(200).json({ status: 'success' });
-// };
+    res.status(200).json({ status: 'success' });
+  } catch (err) {
+    res.status(400).json({ status: 'error', message: err.message });
+  }
+};

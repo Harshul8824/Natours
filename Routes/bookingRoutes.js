@@ -1,23 +1,29 @@
-// const express = require('express')
-// const authController = require('./../Controller/authController');
-// const bookingController = require('./../Controller/bookingController');
+const express = require('express');
+const authController = require('./../Controller/authController');
+const bookingController = require('./../Controller/bookingController');
+const razorpayController = require('./../Controller/razorpayController');
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.use(authController.protect);
+// Public webhook route (Doesn't need authentication since it is triggered by Razorpay)
+router.post('/webhook', razorpayController.razorpayWebhook);
 
-// // router.get('/razorpay-order/:tourId', bookingController.getCheckOutSession);
+// Protect all routes below
+router.use(authController.protect);
 
-// router.use(authController.restrictTo('admin', 'lead-guide'))
+// Endpoint used by frontend to create an order
+router.get('/razorpay-order/:tourID', bookingController.getCheckOutSession);
 
-// router.route('/')
-//     .get(bookingController.getAllBookings)
-//     .post(bookingController.createBooking);
+// Admin / Lead-guide only routes
+router.use(authController.restrictTo('admin', 'lead-guide'));
 
-// router.route('/:id')
-//     .get(bookingController.getBooking)
-//     .patch(bookingController.updateBooking)
-//     .delete(bookingController.deleteBooking);
+router.route('/')
+    .get(bookingController.getAllBookings)
+    .post(bookingController.createBooking);
 
-// module.exports = router;
+router.route('/:id')
+    .get(bookingController.getBooking)
+    .patch(bookingController.updateBooking)
+    .delete(bookingController.deleteBooking);
 
+module.exports = router;
