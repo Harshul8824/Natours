@@ -32,17 +32,19 @@ app.use(cors({
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://unpkg.com"],
+      defaultSrc: ["'self'", 'https://*.razorpay.com'],
+      scriptSrc: ["'self'", "https://unpkg.com", 'https://*.razorpay.com'],
       styleSrc: ["'self'", "'unsafe-inline'", "https://unpkg.com", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: [
         "'self'",
         "data:",
         "https://*.tile.openstreetmap.org",
-        "https://unpkg.com"
+        "https://unpkg.com",
+        "https://*.razorpay.com"
       ],
-      connectSrc: ["'self'", "https://*.tile.openstreetmap.org"]
+      connectSrc: ["'self'", "https://*.tile.openstreetmap.org", "https://*.razorpay.com", "https://api.razorpay.com"],
+      frameSrc: ["'self'", "https://*.razorpay.com"]
     }
   })
 );

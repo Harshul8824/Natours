@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from 'axios';
-import { showAlert } from './alerts';
+import { showAlerts } from './alerts';
 
 // Load Razorpay script dynamically (safe way)
 const loadRazorpay = () => {
@@ -20,7 +20,7 @@ export const bookTour = async tourId => {
         // 1) Load Razorpay SDK
         const loaded = await loadRazorpay();
         if (!loaded) {
-            return showAlert('error', 'Razorpay SDK failed to load');
+            return showAlerts('error', 'Razorpay SDK failed to load');
         }
 
         // 2) Get Razorpay order from backend
@@ -40,7 +40,10 @@ export const bookTour = async tourId => {
             order_id: order.id,
 
             handler: function () {
-                showAlert('success', 'Payment successful! Booking will be confirmed shortly.');
+                showAlerts('success', 'Payment successful! Booking will be confirmed shortly.');
+                window.setTimeout(() => {
+                    location.reload();
+                }, 1500);
             },
 
             theme: {
@@ -54,6 +57,6 @@ export const bookTour = async tourId => {
 
     } catch (err) {
         console.error(err);
-        showAlert('error', 'Payment failed. Please try again.');
+        showAlerts('error', 'Payment failed. Please try again.');
     }
 };
