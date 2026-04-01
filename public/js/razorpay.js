@@ -28,11 +28,11 @@ export const bookTour = async tourId => {
             `/api/v1/bookings/razorpay-order/${tourId}`
         );
 
-        const { order } = res.data;
+        const { order, key_id } = res.data;
 
         // 3) Configure Razorpay checkout
         const options = {
-            key: process.env.RAZORPAY_KEY_ID || 'rzp_test_xxxxxxxx', // test key
+            key: key_id,
             amount: order.amount,
             currency: order.currency,
             name: 'Natours',

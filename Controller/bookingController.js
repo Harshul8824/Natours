@@ -29,7 +29,8 @@ exports.getCheckOutSession = catchAsync(async (req, res, next) => {
    // 3) Send order to frontend
    res.status(200).json({
       status: 'success',
-      order
+      order,
+      key_id: process.env.RAZORPAY_KEY_ID
    });
 });
 
