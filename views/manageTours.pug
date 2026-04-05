@@ -1,0 +1,25 @@
+extends base
+
+block content
+  main.main
+    .card-container
+      h2.heading-secondary.ma-bt-md #{title}
+      if tours && tours.length > 0
+        table.table(style="width:100%; text-align:left; font-size:1.5rem; background:#fff; padding:2rem; border-radius:3px;")
+          thead
+            tr
+              th Name
+              th Duration
+              th Price
+              th Actions
+          tbody
+            each tour in tours
+              tr(style="border-bottom: 1px solid #eee;")
+                td= tour.name
+                td=`${tour.duration} days`
+                td=`$${tour.price}`
+                td
+                  button.btn.btn--small.btn--green(style="margin-right: 1rem") Edit
+                  button.btn.btn--small.btn--red Delete
+      else
+        p No tours found.

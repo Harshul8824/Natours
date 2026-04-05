@@ -1,0 +1,26 @@
+extends base
+
+block content
+  main.main
+    .card-container
+      h2.heading-secondary.ma-bt-md #{title}
+      if bookings && bookings.length > 0
+        table.table(style="width:100%; text-align:left; font-size:1.5rem; background:#fff; padding:2rem; border-radius:3px;")
+          thead
+            tr
+              th Tour
+              th User
+              th Price
+              th Paid
+              th Actions
+          tbody
+            each booking in bookings
+              tr(style="border-bottom: 1px solid #eee;")
+                td= booking.tour ? booking.tour.name : 'Unknown'
+                td= booking.user ? booking.user.name : 'Unknown'
+                td= `$${booking.price}`
+                td= booking.paid ? 'Yes' : 'No'
+                td
+                  button.btn.btn--small.btn--red Delete
+      else
+        p No bookings found.

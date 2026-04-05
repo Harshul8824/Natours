@@ -1,0 +1,27 @@
+extends base
+
+block content
+  main.main
+    .card-container
+      h2.heading-secondary.ma-bt-md #{title}
+      if reviews && reviews.length > 0
+        table.table(style="width:100%; text-align:left; font-size:1.5rem; background:#fff; padding:2rem; border-radius:3px;")
+          thead
+            tr
+              th Tour
+              th User
+              th Rating
+              th Review
+              th Actions
+          tbody
+            each review in reviews
+              tr(style="border-bottom: 1px solid #eee;")
+                td= review.tour ? review.tour.name : 'Unknown'
+                td= review.user ? review.user.name : 'Unknown'
+                td= review.rating
+                td= review.review.substring(0, 30) + '...'
+                td
+                  button.btn.btn--small.btn--green(style="margin-right: 1rem") Edit
+                  button.btn.btn--small.btn--red Delete
+      else
+        p No reviews found.

@@ -87,3 +87,46 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
     tours
   })
 })
+
+exports.getForgotPasswordForm = (req, res) => {
+  res.status(200).render('forgotPassword', {
+    title: 'Forgot Password'
+  });
+};
+
+exports.getResetPasswordForm = (req, res) => {
+  res.status(200).render('resetPassword', {
+    title: 'Reset Password',
+    token: req.params.token
+  });
+};
+
+exports.getManageTours = catchAsync(async (req, res) => {
+  const tours = await Tour.find();
+  res.status(200).render('manageTours', { title: 'Manage Tours', tours });
+});
+
+exports.getManageUsers = catchAsync(async (req, res) => {
+  const users = await User.find();
+  res.status(200).render('manageUsers', { title: 'Manage Users', users });
+});
+
+exports.getManageReviews = catchAsync(async (req, res) => {
+  // Assuming Review model is required here or imported at top
+  // To keep simple let's just make it a placeholder or import Review
+  // Actually we need `const Review = require('./../models/reviewModel');` at the top
+  const Review = require('./../models/reviewModel');
+  const reviews = await Review.find().populate('tour').populate('user');
+  res.status(200).render('manageReviews', { title: 'Manage Reviews', reviews });
+});
+
+exports.getManageBookings = catchAsync(async (req, res) => {
+  const bookings = await Booking.find().populate('tour').populate('user');
+  res.status(200).render('manageBookings', { title: 'Manage Bookings', bookings });
+});
+
+exports.getMyReviews = catchAsync(async (req, res) => {
+  const Review = require('./../models/reviewModel');
+  const reviews = await Review.find({ user: req.user.id }).populate('tour');
+  res.status(200).render('myReviews', { title: 'My Reviews', reviews });
+});

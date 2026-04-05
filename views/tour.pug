@@ -74,7 +74,18 @@ block content
       each review in tour.reviews
        +reviewCard(review)
 
-
+    if user
+      .login-form(style="max-width:80rem; margin:0 auto; padding:3rem; background-color:#fff; border-radius:3px; box-shadow:0 1.5rem 4rem rgba(0,0,0,0.1);")
+        h2.heading-secondary.ma-bt-lg Write a Review
+        form.form.form--add-review(data-tour-id=`${tour.id}`)
+          .form__group
+            label.form__label(for='review') Review
+            textarea#review.form__input(rows='4', required)
+          .form__group.ma-bt-md
+            label.form__label(for='rating') Rating (1-5)
+            input#rating.form__input(type='number', min='1', max='5', required)
+          .form__group
+            button.btn.btn--green Submit Review
   section.section-cta
     .cta
       .cta__img.cta__img--logo

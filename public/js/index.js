@@ -3,6 +3,7 @@ import '@babel/polyfill';
 import { dispplayMap } from './leafletMap';
 import { updateSttings } from './updateSettings';
 import { bookTour } from './razorpay'
+import { forgotPassword, resetPassword, deleteAccount, addReview } from './features';
 
 //LOGIN
 const loginForm = document.querySelector('.form--login');
@@ -11,6 +12,11 @@ const logoutBtn = document.querySelector('.nav__el--logout')
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+
+const forgotPasswordForm = document.querySelector('.form--forgot-password');
+const resetPasswordForm = document.querySelector('.form--reset-password');
+const deleteAccountBtn = document.getElementById('delete-account-btn');
+const addReviewForm = document.querySelector('.form--add-review');
 
 const mapBox = document.getElementById('map');
 
@@ -22,12 +28,9 @@ if (mapBox) {
 
 if (loginForm) {
     loginForm.addEventListener('submit', e => {
-        e.preventDefault(); //It prevents actions like page reload on form submit, link redirection, or other browser default actions.
+        e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-
-        // console.log(email, password);
-
         login(email, password);
     })
 }
@@ -39,7 +42,6 @@ if (signupForm) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('passwordConfirm').value;
-
         signup(name, email, password, passwordConfirm);
     })
 }
@@ -55,7 +57,6 @@ if (userDataForm) {
         form.append('email', document.getElementById('email').value);
         form.append('name', document.getElementById('name').value);
         form.append('photo', document.getElementById('photo').files[0]);
-        // console.log(form);
         updateSttings(form, 'data');
     })
 }
@@ -82,4 +83,40 @@ if(bookBtn){
         const { tourId } = e.target.dataset;
         bookTour(tourId);
     })
+}
+
+if (forgotPasswordForm) {
+    forgotPasswordForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        forgotPassword(email);
+    });
+}
+
+if (resetPasswordForm) {
+    resetPasswordForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const token = resetPasswordForm.dataset.token;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordConfirm').value;
+        resetPassword(token, password, passwordConfirm);
+    });
+}
+
+if (deleteAccountBtn) {
+    deleteAccountBtn.addEventListener('click', e => {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            deleteAccount();
+        }
+    });
+}
+
+if (addReviewForm) {
+    addReviewForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const tourId = addReviewForm.dataset.tourId;
+        const review = document.getElementById('review').value;
+        const rating = document.getElementById('rating').value;
+        addReview(tourId, review, rating);
+    });
 }
